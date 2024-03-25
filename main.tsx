@@ -1,38 +1,29 @@
+// src/components/InputComponent.tsx
+
 import React, { useState } from 'react';
-import './styles.css';
 
-const Text2Book: React.FC = () => {
-    const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
-    const [content, setContent] = useState('');
+interface InputComponentProps {
+  onSubmit: (text: string) => void;
+}
 
-    const generateBook = () => {
-        const newTitle = prompt('Enter book title:');
-        const newAuthor = prompt('Enter author name:');
-        const newContent = prompt('Enter book content:');
+const InputComponent: React.FC<InputComponentProps> = ({ onSubmit }) => {
+  const [inputText, setInputText] = useState('');
 
-        if (!newTitle || !newAuthor || !newContent) {
-            alert('Please fill in all fields.');
-            return;
-        }
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInputText(e.target.value);
+  };
 
-        setTitle(newTitle);
-        setAuthor(newAuthor);
-        setContent(newContent);
-    };
+  const handleSubmit = () => {
+    onSubmit(inputText);
+    setInputText('');
+  };
 
-    return (
-        <div className="book-container">
-            <button onClick={generateBook}>Generate Book</button>
-            {title && author && content && (
-                <div className="book">
-                    <h2>{title}</h2>
-                    <p>By: {author}</p>
-                    <div>{content}</div>
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <div>
+      <textarea value={inputText} onChange={handleInputChange} />
+      <button onClick={handleSubmit}>Convert to Book</button>
+    </div>
+  );
 };
 
-export default Text2Book;
+export default InputComponent;
