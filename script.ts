@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function generateBook() {
-  const titleInput = document.getElementById('bookTitle') as HTMLInputElement;
-  const authorInput = document.getElementById('author') as HTMLInputElement;
-  const contentInput = document.getElementById('content') as HTMLTextAreaElement;
+  const titleInput = document.getElementById('bookTitle');
+  const authorInput = document.getElementById('author');
+  const contentInput = document.getElementById('content');
   const outputDiv = document.getElementById('output');
 
   const title = titleInput.value;
